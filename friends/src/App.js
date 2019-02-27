@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
 
-import FriendsList from "./components/FriendsList.js";
+import FriendsList from "./components/FriendsList/FriendsList.js";
 
 class App extends Component {
   render() {
