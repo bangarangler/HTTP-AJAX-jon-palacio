@@ -1,3 +1,45 @@
 .Form {
-  border: 1px solid blue;
+  //border: 1px solid blue;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+
+	@media (max-width: 654px) {
+		flex-direction: column;
+		margin: 5% 0;
+		//border: 1px solid green;
+	}
+
+	input {
+		text-align: center;
+		font-size: 20px;
+		margin: 1% 0;
+
+		@media (max-width: 654px) {
+			margin: 3% 0;
+		}
+	}
+
+	button {
+		border: 1px solid darkorchid;
+		color: darkorchid;
+		background: aqua;
+		width: 150px;
+		font-size: 20px;
+		box-shadow: 1px 0 2px black;
+		cursor: pointer;
+
+		@media (max-width: 654px) {
+			margin-top: 3%;
+		}
+
+		&:hover {
+			border: 1px solid aqua;
+			color: aqua;
+			background: darkorchid;
+		}
+
+	}
 }
