@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+//import { Link, Route } from 'react-router-dom';
 
 import Friend from "../Friend/Friend.js";
 import FriendForm from "../FriendForm/FriendForm";
@@ -11,7 +12,11 @@ class FriendsList extends React.Component {
     super();
     this.state = {
       friends: [],
-      error: ""
+      error: "",
+      name: "",
+      age: "",
+      email: "",
+      id: ""
     };
   }
 
@@ -28,18 +33,25 @@ class FriendsList extends React.Component {
       });
   }
 
+  changeHandler = property => {
+    this.setState(property);
+  };
+
   addFriend = e => {
-    debugger;
+    //debugger;
     e.preventDefault();
-    axios.post("http://localhost:5000/friends", {
-      friends: [
-        ...this.state.friends,
-        this.state.name,
-        this.state.age,
-        this.state.email
-      ]
-    });
-    this.setState({ name: "", age: "", email: "" });
+    axios
+      .post("http://localhost:5000/friends", {
+        name: this.state.name,
+        age: this.state.age,
+        email: this.state.email
+      })
+      .then(res => {
+        this.setState({ friends: res.data, name: "", age: "", email: "" });
+      })
+      .catch(err => console.log("2nd error"));
+    //this.setState({ name: "", age:"", email: "" });
+
     //this.setState({
     //friends: [
     //...this.state.friends,
@@ -58,7 +70,13 @@ class FriendsList extends React.Component {
     return (
       <div className={styles.Wrapper}>
         <h1 className={styles.Heading}>List of Friends!</h1>
-        <FriendForm addFriend={this.addFriend} />
+        <FriendForm
+          addFriend={this.addFriend}
+          name={this.state.name}
+          age={this.state.age}
+          email={this.state.email}
+          changeHandler={this.changeHandler}
+        />
         {this.state.friends.map(friend => {
           return <Friend key={friend.id} friend={friend} />;
         })}
