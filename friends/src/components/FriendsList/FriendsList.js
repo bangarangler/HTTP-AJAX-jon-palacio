@@ -11,12 +11,13 @@ class FriendsList extends React.Component {
   constructor() {
     super();
     this.state = {
+      activeFriend: null,
       friends: [],
-      error: "",
-      name: "",
-      age: "",
-      email: "",
-      id: ""
+      error: ""
+      //name: "",
+      //age: "",
+      //email: "",
+      //id: ""
     };
   }
 
@@ -33,38 +34,39 @@ class FriendsList extends React.Component {
       });
   }
 
-  changeHandler = property => {
-    this.setState(property);
-  };
-
-  addFriend = e => {
-    //debugger;
+  addFriend = (e, newFriend) => {
     e.preventDefault();
+    console.log("test");
     axios
-      .post("http://localhost:5000/friends", {
-        name: this.state.name,
-        age: this.state.age,
-        email: this.state.email
-      })
+      .post("http://localhost:5000/friends", newFriend)
       .then(res => {
-        this.setState({ friends: res.data, name: "", age: "", email: "" });
+        console.log(res);
+        this.setState({
+          friends: res.data
+        });
       })
-      .catch(err => console.log("2nd error"));
-    //this.setState({ name: "", age:"", email: "" });
-
-    //this.setState({
-    //friends: [
-    //...this.state.friends,
-    //...this.state.error,
-    //this.state.name,
-    //this.state.age,
-    //this.state.email
-    //],
-    //name: "",
-    //age: "",
-    //email: ""
-    //});
+      .catch(err => console.log("error...", err));
   };
+
+  //changeHandler = property => {
+  //this.setState(property);
+  //};
+
+  //addFriend = e => {
+  ////debugger;
+  //e.preventDefault();
+  //axios
+  //.post("http://localhost:5000/friends", {
+  //name: this.state.name,
+  //age: this.state.age,
+  //email: this.state.email
+  //})
+  //.then(res => {
+  //this.setState({ friends: res.data, name: "", age: "", email: "" });
+  //})
+  //.catch(err => console.log("2nd error"));
+
+  //this.setState({ name: "", age:"", email: "" });
 
   render() {
     return (
@@ -72,10 +74,11 @@ class FriendsList extends React.Component {
         <h1 className={styles.Heading}>List of Friends!</h1>
         <FriendForm
           addFriend={this.addFriend}
-          name={this.state.name}
-          age={this.state.age}
-          email={this.state.email}
-          changeHandler={this.changeHandler}
+          //addFriend={this.addFriend}
+          //name={this.state.name}
+          //age={this.state.age}
+          //email={this.state.email}
+          //changeHandler={this.changeHandler}
         />
         {this.state.friends.map(friend => {
           return <Friend key={friend.id} friend={friend} />;
