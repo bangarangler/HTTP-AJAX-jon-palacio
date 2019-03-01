@@ -49,15 +49,27 @@ class FriendsList extends React.Component {
   };
 
   removeFriend = (e, id) => {
+    e.preventDefault();
     axios
-      .delete(`http://localhost:5000/friends/${id}`)
+      .delete(`http://localhost:5000/friends/${id}`, id)
       .then(res => {
         this.setState({
           friends: res.data
         });
       })
-      .catch(err => console.log("error: ", err));
+      .catch(err => console.log(err));
   };
+
+  //updateFriend = (e, id) => {
+  //e.preventDefault();
+  //axios.put(`http://localhost:5000/friends/${id}`)
+  //.then(res => {
+  //this.setState({
+  //activeFriend: null,
+  //friends: res.data
+  //})
+  //.catch(err => console.log(err))
+  //})
 
   //changeHandler = property => {
   //this.setState(property);

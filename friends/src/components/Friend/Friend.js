@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Friend.module.scss";
 
-const Friend = props => {
+const friend = props => {
   console.log(props.friend.id);
   return (
     <div className={styles.Card}>
@@ -11,7 +11,7 @@ const Friend = props => {
       <p>Email: {props.friend.email}</p>
       <button
         id={props.id}
-        onClick={(e, id) => props.removeFriend(e.target.id)}
+        onClick={e => props.removeFriend(e, props.friend.id)}
       >
         Remove Friend
       </button>
@@ -19,4 +19,4 @@ const Friend = props => {
   );
 };
 
-export default Friend;
+export default friend;
