@@ -2,6 +2,8 @@ import React from "react";
 
 import styles from "./FriendForm.module.scss";
 
+//const uniqid = require("uniqid");
+
 class FriendForm extends React.Component {
   constructor() {
     super();
@@ -9,8 +11,8 @@ class FriendForm extends React.Component {
       friend: {
         name: "",
         age: "",
-        email: "",
-        id: ""
+        email: ""
+        //id: ""
       }
     };
   }
@@ -37,6 +39,17 @@ class FriendForm extends React.Component {
       }
     });
   };
+
+  //handleID = () => {
+  //if (this.state.friend.id === "") {
+  //this.setState(prevState => ({
+  //friend: {
+  //...prevState.friend,
+  //id: uniqid().toString()
+  //}
+  //}));
+  //}
+  //};
 
   //changeHandler = e => {
   //this.setState({ [e.target.name]: e.target.value });

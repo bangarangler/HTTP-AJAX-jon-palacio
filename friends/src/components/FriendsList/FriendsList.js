@@ -25,7 +25,7 @@ class FriendsList extends React.Component {
     axios
       .get("http://localhost:5000/friends")
       .then(res => {
-        console.log(res);
+        //console.log(res);
         this.setState({ friends: res.data });
       })
       .catch(err => {
@@ -36,7 +36,7 @@ class FriendsList extends React.Component {
 
   addFriend = (e, newFriend) => {
     e.preventDefault();
-    console.log("test");
+    //console.log("test");
     axios
       .post("http://localhost:5000/friends", newFriend)
       .then(res => {
@@ -46,6 +46,17 @@ class FriendsList extends React.Component {
         });
       })
       .catch(err => console.log("error...", err));
+  };
+
+  removeFriend = (e, id) => {
+    axios
+      .delete(`http://localhost:5000/friends/${id}`)
+      .then(res => {
+        this.setState({
+          friends: res.data
+        });
+      })
+      .catch(err => console.log("error: ", err));
   };
 
   //changeHandler = property => {
@@ -81,7 +92,15 @@ class FriendsList extends React.Component {
           //changeHandler={this.changeHandler}
         />
         {this.state.friends.map(friend => {
-          return <Friend key={friend.id} friend={friend} />;
+          console.log(friend);
+          return (
+            <Friend
+              key={friend.id}
+              friend={friend}
+              removeFriend={this.removeFriend}
+              id={friend.id}
+            />
+          );
         })}
       </div>
     );
